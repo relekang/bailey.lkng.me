@@ -8,12 +8,11 @@ client = redis.createClient()
 client.unref()
 
 router.get('/', (req, res) ->
-    res.render('index', { title: 'Express' })
+    res.redirect('/new')
 )
 
 router.get('/view/:key', (req, res) ->
-    client.hgetall(req.params.key, (err, obj) ->
-        console.dir(obj)
+    client.hgetall('bsweb#{req.params.key}', (err, obj) ->
         res.render('viewSnippet', obj)
     )
 )
@@ -25,11 +24,11 @@ router.route('/new')
     .post((req, res) ->
         key = slugify(req.param('slug'))
         data = {
-          bs: req.param('bs')
-          js: bailey.parseString(req.param('bs'), { bare: true })
-          slug: key
+            bs: req.param('bs')
+            js: bailey.parseString(req.param('bs'), { bare: true })
+            slug: key
         }
-        client.hmset(key, data)
+        client.hmset('bsweb#{key}', data)
         res.redirect('/view/#{key}')
         res.render('viewSnippet', data)
     )
