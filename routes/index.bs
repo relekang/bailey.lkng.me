@@ -22,13 +22,14 @@ router.route('/new')
         res.render('newSnippet', {})
     )
     .post((req, res) ->
-        key = slugify(req.param('slug'))
+        key = slugify(req.param('title'))
         data = {
             bs: req.param('bs')
             js: bailey.parseString(req.param('bs'), {})
             jsBare: bailey.parseString(req.param('bs'), { bare: true })
             jsNode: bailey.parseString(req.param('bs'), { node: true })
             slug: key
+            title: req.param('title')
         }
         client.hmset('bsweb#{key}', data)
         res.redirect('/view/#{key}')
