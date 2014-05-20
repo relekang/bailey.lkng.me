@@ -1,0 +1,37 @@
+import express
+import redis
+import bailey
+import slugify
+
+router = express.Router()
+client = redis.createClient()
+client.unref()
+
+router.get('/', (req, res) ->
+    res.render('index', { title: 'Express' })
+)
+
+router.get('/view/:key', (req, res) ->
+    client.hgetall(req.params.key, (err, obj) ->
+        console.dir(obj)
+        res.render('viewSnippet', obj)
+    )
+)
+
+router.route('/new')
+    .get((req, res) ->
+        res.render('newSnippet', {})
+    )
+    .post((req, res) ->
+        key = slugify(req.param('slug'))
+        data = {
+          bs: req.param('bs')
+          js: bailey.parseString(req.param('bs'), { bare: true })
+          slug: key
+        }
+        client.hmset(key, data)
+        res.redirect('/view/#{key}')
+        res.render('viewSnippet', data)
+    )
+
+export router
