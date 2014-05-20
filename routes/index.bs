@@ -23,18 +23,17 @@ router.route('/new')
     )
     .post((req, res) ->
         key = slugify(req.param('slug'))
-        try
-            data = {
-                bs: req.param('bs')
-                js: bailey.parseString(req.param('bs'), {})
-                jsBare: bailey.parseString(req.param('bs'), { bare: true })
-                jsNode: bailey.parseString(req.param('bs'), { node: true })
-                slug: key
-            }
-            client.hmset('bsweb#{key}', data)
-            res.redirect('/view/#{key}')
-            res.render('viewSnippet', data)
-        catch (e)
+        data = {
+            bs: req.param('bs')
+            js: bailey.parseString(req.param('bs'), {})
+            jsBare: bailey.parseString(req.param('bs'), { bare: true })
+            jsNode: bailey.parseString(req.param('bs'), { node: true })
+            slug: key
+        }
+        client.hmset('bsweb#{key}', data)
+        res.redirect('/view/#{key}')
+        res.render('viewSnippet', data)
+
     )
 
 export router
