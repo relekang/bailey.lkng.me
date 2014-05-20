@@ -1,13 +1,14 @@
 extends layout
 
 block content
-    div(class="col-md-4 col-md-offset-4")
-      h1 Add a snippet
-      form(role="form" method="post")
+  div(class="col-md-4 col-md-offset-4")
+    h1 Add a snippet
+    form(role="form" method="post")
+      div(class="form-group")
+        label(for="slug") Slug:
+        input(name="slug" type="text" class="form-control")
         div(class="form-group")
-          label(for="slug") Slug:
-          input(name="slug" type="text" class="form-control")
-          div(class="form-group")
-            label(for="bs") Code:
-            textarea(name="bs" class="form-control")
-        button(class="btn btn-info" type="submit") Save
+          label(for="bs") Code:
+          textarea(name="bs" class="form-control" rows="10")
+      button(class="btn btn-info" type="submit") Save
+    p(class="lead") There is no guarantee that your snippet will remain saved. We strive not to reset the database, but sometimes we have to.

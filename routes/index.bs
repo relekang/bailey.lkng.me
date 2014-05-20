@@ -25,7 +25,9 @@ router.route('/new')
         key = slugify(req.param('slug'))
         data = {
             bs: req.param('bs')
-            js: bailey.parseString(req.param('bs'), { bare: true })
+            js: bailey.parseString(req.param('bs'), {})
+            jsBare: bailey.parseString(req.param('bs'), { bare: true })
+            jsNode: bailey.parseString(req.param('bs'), { node: true })
             slug: key
         }
         client.hmset('bsweb#{key}', data)
