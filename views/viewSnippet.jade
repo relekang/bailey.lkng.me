@@ -1,9 +1,12 @@
 extends layout
 
 block content
-  h1 #{slug}
+  div(class="col-sm-12")
+    h1 #{slug}
+    p Link to this with <code>http://ron.lkng.me:3000/view/#{slug}</code>
   div(class="col-sm-6")
     h2 Bailey.js
+    h4 &nbsp;
     pre
       code #{bs}
 
