@@ -1,0 +1,20 @@
+import express
+import child_process as process
+
+router = express.Router()
+
+router.get('/', (req, res) ->
+    payload = req.param('payload')
+    if payload.action == 'push'
+        if payload.ref == 'refs/heads/master'
+            process.exec('git pull origin master && gulp && forever restart bin/www', (err, stdout,stderr) ->
+                if err
+                    res.send(500, '')
+                res.send(200, '')
+            )
+            res.send(200, '')
+
+    res.send(403, '')
+)
+
+export router
