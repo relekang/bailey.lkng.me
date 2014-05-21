@@ -22,7 +22,6 @@ router.get('/view/:key', (req, res) ->
     client.hincrby('bsweb#{req.params.key}', 'views', 1)
     client.hgetall('bsweb#{req.params.key}', (err, obj) ->
         obj.version = req.baileyVersion
-        console.log(obj.views)
         res.render('viewSnippet', obj)
     )
 )
