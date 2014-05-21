@@ -42,9 +42,18 @@ router.route('/new')
             views: 0
         }
         client.hmset('bsweb#{key}', data)
+        client.hmset('bswebarchive', data.slug, data.title)
         res.redirect('/view/#{key}')
-        res.render('viewSnippet', data)
+        res.render('viewSnippet', {snippet: data
+                                   version: req.baileyVersion})
 
     )
+
+router.get('/archive', (req, res) ->
+    snippets = client.hgetall('bswebarchive', (err, obj) ->
+        res.render('archive', {snippets: obj
+                               version: req.baileyVersion})
+    )
+)
 
 export router

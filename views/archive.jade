@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  div(class="col-sm-4 col-sm-offset-4")
+    h2 Archive
+    ul(class="list-unstyled list-group")
+      each slug, title in snippets
+        li
+          a(href="/view/#{slug}" class="list-group-item") #{title}
