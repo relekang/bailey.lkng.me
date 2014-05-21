@@ -28,11 +28,6 @@ app.use((req, res, next) ->
     next(err)
 )
 
-# load bailey version into context
-app.use((req, res, next) ->
-
-)
-
 # development error handler
 # will print stacktrace
 if app.get('env') == 'development'

@@ -1,3 +1,4 @@
+import npm
 import express
 import redis
 import bailey
@@ -7,19 +8,26 @@ router = express.Router()
 client = redis.createClient()
 client.unref()
 
+# load bailey version into context
+router.use((req, res, next) ->
+    req['baileyVersion'] = bailey.version or '0.0.7'
+    next()
+)
+
 router.get('/', (req, res) ->
     res.redirect('/new')
 )
 
 router.get('/view/:key', (req, res) ->
     client.hgetall('bsweb#{req.params.key}', (err, obj) ->
+        obje.version = req.baileyVersion
         res.render('viewSnippet', obj)
     )
 )
 
 router.route('/new')
     .get((req, res) ->
-        res.render('newSnippet', {})
+        res.render('newSnippet', {version: req.baileyVersion})
     )
     .post((req, res) ->
         key = slugify(req.param('title'))
