@@ -19,8 +19,10 @@ router.get('/', (req, res) ->
 )
 
 router.get('/view/:key', (req, res) ->
+    client.hincrby('bsweb#{req.params.key}', 'views', 1)
     client.hgetall('bsweb#{req.params.key}', (err, obj) ->
-        obje.version = req.baileyVersion
+        obj.version = req.baileyVersion
+        console.log(obj.views)
         res.render('viewSnippet', obj)
     )
 )
@@ -38,6 +40,7 @@ router.route('/new')
             jsNode: bailey.parseString(req.param('bs'), { node: true })
             slug: key
             title: req.param('title')
+            views: 0
         }
         client.hmset('bsweb#{key}', data)
         res.redirect('/view/#{key}')
