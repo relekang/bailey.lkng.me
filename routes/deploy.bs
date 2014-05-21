@@ -4,7 +4,7 @@ import child_process as process
 router = express.Router()
 
 router.post('/', (req, res) ->
-    if req.body.ref == 'refs/heads/master'
+    deploy = () ->
         process.exec('git pull origin master && gulp && forever restart bin/www', (err, stdout,stderr) ->
             if err
                 res.send(500, '')
@@ -12,7 +12,14 @@ router.post('/', (req, res) ->
         )
         res.send(200, '')
 
-    res.send(403, '')
+    if 'ref' in req.body
+      if req.body.ref == 'refs/heads/master'
+        deploy()
+
+    if 'release' in req.body
+      deploy()
+
+    res.send(404, '')
 )
 
 export router
