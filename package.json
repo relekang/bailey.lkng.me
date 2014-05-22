@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "gulp && forever start bin/www",
+    "stop": "forever stop bin/www",
+    "restart": "gulp && forever restart bin/www"
   },
   "dependencies": {
     "bailey": ">=0.0.8",
