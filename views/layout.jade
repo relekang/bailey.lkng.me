@@ -7,6 +7,9 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     div(class="container")
+      - if (messages.error)
+        .alert.alert-danger
+          span= messages.error
       div(class="row")
         block content
     div(class="footer text-center") We are running bailey #{version}

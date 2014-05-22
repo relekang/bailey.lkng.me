@@ -1,5 +1,6 @@
 import npm
 import express
+
 import redis
 import bailey
 import slugify
@@ -28,31 +29,43 @@ router.get('/view/:key', (req, res) ->
 
 router.route('/new')
     .get((req, res) ->
-        res.render('newSnippet', {version: req.baileyVersion})
+        res.render('newSnippet', {
+            snippet: {title: '', bs: ''}
+            version: req.baileyVersion
+        })
     )
     .post((req, res) ->
         key = slugify(req.param('title'))
-        data = {
-            bs: req.param('bs')
-            js: bailey.parseString(req.param('bs'), {})
-            jsBare: bailey.parseString(req.param('bs'), { bare: true })
-            jsNode: bailey.parseString(req.param('bs'), { node: true })
-            slug: key
-            title: req.param('title')
-            views: 0
+        snippet = {
+          title: req.param('title')
+          bs: req.param('bs')
         }
-        client.hmset('bsweb#{key}', data)
-        client.hmset('bswebarchive', data.slug, data.title)
-        res.redirect('/view/#{key}')
-        res.render('viewSnippet', {snippet: data
-                                   version: req.baileyVersion})
+        if req.param('title') != ''
+            snippet.js = bailey.parseString(req.param('bs'), {})
+            snippet.jsBare = bailey.parseString(req.param('bs'), { bare: true })
+            snippet.jsNode = bailey.parseString(req.param('bs'), { node: true })
+            snippet.slug = key
+            snippet.views = 0
+            client.hmset('bsweb#{key}', snippet)
+            client.hmset('bswebarchive', snippet.slug, snippet.title)
+            res.redirect('/view/#{key}')
+        else
+          req.flash('error', 'You have to enter a title')
+
+
+        res.render('newSnippet', {
+            snippet: snippet
+            version: req.baileyVersion
+        })
 
     )
 
 router.get('/archive', (req, res) ->
     snippets = client.hgetall('bswebarchive', (err, obj) ->
-        res.render('archive', {snippets: obj
-                               version: req.baileyVersion})
+        res.render('archive', {
+            snippets: obj
+            version: req.baileyVersion
+        })
     )
 )
 

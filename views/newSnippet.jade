@@ -6,9 +6,9 @@ block content
     form(role="form" method="post")
       div(class="form-group")
         label(for="title") Title:
-        input(name="title" type="text" class="form-control")
+        input(name="title" type="text" value="#{snippet.title}" class="form-control")
         div(class="form-group")
           label(for="bs") Code:
-          textarea(name="bs" class="form-control" rows="10")
+          textarea(name="bs" class="form-control" rows="10") #{snippet.bs}
       button(class="btn btn-info" type="submit") Save
     p(class="lead") There is no guarantee that your snippet will remain saved. We strive not to reset the database, but sometimes we have to.
