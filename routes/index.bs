@@ -10,7 +10,7 @@ client.unref()
 
 # load bailey version into context
 router.use((req, res, next) ->
-    req['baileyVersion'] = bailey.version or '0.0.7'
+    req['baileyVersion'] = bailey.version
     next()
 )
 
