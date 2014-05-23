@@ -5,7 +5,7 @@
   "scripts": {
     "start": "gulp && forever start bin/www",
     "stop": "forever stop bin/www",
-    "restart": "gulp && forever restart bin/www"
+    "restart": "gulp && (forever stop bin/www; forever start bin/www)"
   },
   "dependencies": {
     "bailey": ">=0.0.8",
