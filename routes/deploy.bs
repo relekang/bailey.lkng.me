@@ -19,6 +19,9 @@ router.post('/', (req, res) ->
     if 'release' in req.body
       deploy()
 
+    if 'zen' in req.body
+      res.send(200)
+
     res.send(404, '')
 )
 
