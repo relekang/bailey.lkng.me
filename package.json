@@ -26,6 +26,7 @@
   "devDependencies": {
     "gulp": "^3.6.2",
     "gulp-bailey": "^0.1.2",
+    "gulp-ignore": "^1.1.0",
     "gulp-util": "^2.2.14",
     "mocha": "^1.19.0",
     "should": "^3.3.1",

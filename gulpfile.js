@@ -1,20 +1,22 @@
 var gulp = require('gulp'),
     bailey = require('gulp-bailey'),
-    gutil = require('gulp-util');
+    gutil = require('gulp-util'),
+    gulpIgnore = require('gulp-ignore');
 
 paths = {
   express: {
-    src: './',
+    src: './**/*.bs',
     dest: './'
   },
   public: {
-    src: './public/javascripts/',
+    src: './public/javascripts/*.bs',
     dest: './public/javascripts/'
   }
 };
 
 gulp.task('express', function () {
   gulp.src(paths.express.src)
+    .pipe(gulpIgnore.exclude(/javascripts/))
     .pipe(bailey({node: true}).on('error', gutil.log))
     .pipe(gulp.dest(paths.express.dest));
 });
