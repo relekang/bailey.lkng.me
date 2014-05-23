@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div(class="col-md-4 col-md-offset-4")
+  .col-md-5.col-md-offset-1
     h1 Add a snippet
     form(role="form" method="post")
       div(class="form-group")
@@ -12,3 +12,6 @@ block content
           textarea(name="bs" class="form-control" rows="10") #{snippet.bs}
       button(class="btn btn-info" type="submit") Save
     p(class="lead") There is no guarantee that your snippet will remain saved. We strive not to reset the database, but sometimes we have to.
+  .col-md-5.preview
+    pre
+      code

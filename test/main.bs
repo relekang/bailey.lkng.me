@@ -1,0 +1,19 @@
+import mocha
+import should
+import supertest as request
+
+describe('routing', () ->
+    context('api', () ->
+      url = 'http://127.0.0.1:3000'
+      it('should parse bailey.js code and return bare js', (done) ->
+          request(url)
+        	.post('/api/parse')
+        	.send({bs: 'a = 42'})
+          .expect(200)
+        	.end((err, res) ->
+              if err
+                throw err
+          )
+      )
+    )
+)

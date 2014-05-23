@@ -3,10 +3,26 @@ var gulp = require('gulp'),
     gutil = require('gulp-util');
 
 paths = {
-  express: './**/*.bs'
+  express: {
+    src: './',
+    dest: './'
+  },
+  public: {
+    src: './public/javascripts/',
+    dest: './public/javascripts/'
+  }
 };
-gulp.task('default', function () {
-  gulp.src(paths.express)
+
+gulp.task('express', function () {
+  gulp.src(paths.express.src)
     .pipe(bailey({node: true}).on('error', gutil.log))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest(paths.express.dest));
 });
+
+gulp.task('public', function () {
+  gulp.src(paths.public.src)
+    .pipe(bailey({bare: true}).on('error', gutil.log))
+    .pipe(gulp.dest(paths.public.dest));
+});
+
+gulp.task('default', ['express', 'public']);

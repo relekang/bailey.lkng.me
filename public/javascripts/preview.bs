@@ -1,0 +1,5 @@
+$('textarea[name=bs]').on('change', (e) ->
+    $.post( "/api/parse", { bs: $('textarea[name=bs]').val() }, (data) ->
+        $( ".preview code" ).html( data.code )
+    )
+)
