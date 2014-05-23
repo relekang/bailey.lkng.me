@@ -5,7 +5,7 @@ router = express.Router()
 
 router.post('/', (req, res) ->
     deploy = () ->
-        process.exec('git pull origin master && npm update && npm restart', (err, stdout,stderr) ->
+        process.exec('git pull origin master && npm update && forever restart bin/www', (err, stdout,stderr) ->
             if err
                 res.send(500, '')
             res.send(200, '')
