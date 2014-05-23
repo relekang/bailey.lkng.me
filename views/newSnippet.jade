@@ -11,9 +11,9 @@ block content
           label(for="bs") Code:
           textarea(name="bs" class="form-control" rows="10") #{snippet.bs}
       button(class="btn btn-info" type="submit") Save
-    p(class="lead") There is no guarantee that your snippet will remain saved. We strive not to reset the database, but sometimes we have to.
   .col-md-5.preview
     h1 Preview
     label &nbsp;
     pre
       code.language-coffeescript
+    p The preview is created with the bare option so imports will not be viewed before you save.
