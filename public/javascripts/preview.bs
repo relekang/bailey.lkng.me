@@ -1,5 +1,6 @@
 $('textarea[name=bs]').on('keyup', (e) ->
     $.post( "/api/parse", { bs: $('textarea[name=bs]').val() }, (data) ->
         $( ".preview code" ).html( data.code )
+        Prism.highlightAll()
     )
 )
