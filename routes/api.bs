@@ -7,11 +7,15 @@ router.post('/parse', (req, res) ->
     bs = req.param('bs')
     if bs
         try
-            res.json(200, { code: bailey.parseString(bs, { bare: true })})
+            res.json(200, {
+                bare: bailey.parseString(bs, { bare: true })
+                node: bailey.parseString(bs, { node: true })
+                default: bailey.parseString(bs, {})
+            })
         catch e
-            res.json(400, { error: e })
+            res.json(200, { error: e })
     else
-      res.json(400, { error: 'No content provided.'})
+      res.json(200, { error: 'No content provided.'})
 )
 
 export router
