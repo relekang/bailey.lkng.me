@@ -2,7 +2,7 @@ import backbone as Backbone
 import handlebars as Handlebars
 import prism as Prism
 
-Preview = (CodeViewTemplate) ->
+Preview = (url, CodeViewTemplate) ->
     CodeViewTemplate = CodeViewTemplate or '<h1>Preview</h1>
     {{#if error}}<div class="alert alert-danger">{{error}}</div>{{/if}}
     {{#if bare}}
@@ -28,7 +28,7 @@ Preview = (CodeViewTemplate) ->
 
       compile: (bs) ->
         console.log('compiles')
-        $.post( "/api/parse", { bs: bs }, (data) ->
+        $.post( (url ? url : "") + "/api/parse", { bs: bs }, (data) ->
           @@set({
             bare: data.bare
             node: data.node
