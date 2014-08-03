@@ -1,6 +1,6 @@
 ({
     baseUrl: 'public/javascripts/',
-    name: 'bootstrapper',
+    name: 'preview',
     mainConfigFile: 'public/javascripts/config.js',
-    out: 'public/javascripts/preview.js',
+    out: 'public/javascripts/preview.min.js',
 })
