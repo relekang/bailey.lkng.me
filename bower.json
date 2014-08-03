@@ -1,0 +1,25 @@
+{
+  "name": "bailey.lkng.me",
+  "version": "0.0.0",
+  "homepage": "https://github.com/relekang/bailey.lkng.me",
+  "authors": [
+    "Rolf Erik Lekang <me@rolflekang.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/javascripts/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handlebars": "~1.3.0",
+    "jquery": "~2.1.1",
+    "backbone": "~1.1.2",
+    "prismjs": "*",
+    "requirejs": "~2.1.14"
+  }
+}

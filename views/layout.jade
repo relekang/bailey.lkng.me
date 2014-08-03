@@ -14,9 +14,4 @@ html
         block content
     div(class="footer text-center") We are running bailey #{version}
 
-    script(src="lib/jquery/dist/jquery.min.js" type="text/javascript")
-    script(src="lib/underscore/underscore.js" type="text/javascript")
-    script(src="lib/handlebars/handlebars.js" type="text/javascript")
-    script(src="lib/backbone/backbone.js" type="text/javascript")
-    script(src="/javascripts/prism.js" type="text/javascript")
-    script(src="/javascripts/preview.js" type="text/javascript")
+    script(src="/javascripts/libs/requirejs/require.js" data-main="/javascripts/config.js" type="text/javascript")

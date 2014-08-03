@@ -1,4 +1,6 @@
-#Remember Prism.highlightAll()
+import backbone as Backbone
+import handlebars as Handlebars
+import prism as Prism
 
 CodeViewTemplate = '<h1>Preview</h1>
 {{#if error}}<div class="alert alert-danger">{{error}}</div>{{/if}}
